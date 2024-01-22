@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheets/profie.css" class="css">
+   
+</head>
+
+<body>
+    <header>
+
+        <div class="container">
+                    <a href="/"><button>HOMEPAGE</button></a></a>
+            <div class="profile">
+                <div class="profile-image">
+                    <a target="_blank" href="https://images.unsplash.com/photo-1513721032312-6a18a42c8763?w=152&h=152&fit=crop&crop=faces.jpg">
+                    <img src="https://images.unsplash.com/photo-1513721032312-6a18a42c8763?w=152&h=152&fit=crop&crop=faces" alt="">
+                    </a>
+                   
+                </div>
+    
+                <div class="profile-user-settings">
+    
+                    <h1 class="profile-user-name">
+                          <%= user?.fullname %>
+
+                    </h1>
+    
+                    <button class="btn profile-edit-btn">Edit Profile</button>
+                   <a href="/logout">
+                       <button class="btn profile-edit-btn">Logout Profile</button>
+                    </a>
+                    
+                    <button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog" aria-hidden="true"></i></button>
+                    <form action="/upload" method="post" enctype="multipart/form-data">
+                        <input type="text" name="figcaption" placeholder="post name">
+                        <input type="file" name="file">
+                        <button type="submit">upload</button>
+                    </form>
+                </div>
+    
+                <div class="profile-stats">
+    
+                    <ul>
+                        <li><span class="profile-stat-count"><%=user.posts.length%></span> posts</li>
+                        <li><span class="profile-stat-count">206</span> following</li>
+                    </ul>
+    
+                </div>
+    
+                <div class="profile-bio">
+    
+                    <p contenteditable="true"><span class="profile-real-name"><%=user.username%></span> DEscription</p>
+
+                </div>
+    
+            </div>
+            <!-- End of profile section -->
+    
+        </div>
+        <!-- End of container -->
+    
+    </header>
+    
+    <main>
+    
+        <div class="container">
+    
+            <div class="gallery">
+    
+                <% user?.posts?.forEach(function(post){
+                    console.log(post);
+                     %>
+                        
+                    <div class="gallery-item" tabindex="0">
+                        
+
+                           <img id="expand-trigger"  src="/images/uploads/<%=post.image%>" class="gallery-image" alt="">
+                           <div id="expandable-content">
+                               <!-- Your additional content goes here -->
+                          </div>
+                        <div class="gallery-item-info">
+        
+                            <ul>
+                           
+                                <li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i><%=post.like%></li>
+                                <li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 2</li>
+                                <li class="gallery-item-comments"><span class="visually-hidden"><%post.postText %>:</span><i class="fas fa-comment" aria-hidden="true"></i><%= post.postText%></li>
+                                
+                                <!-- <a href="/:<%= post._id%>"><button  class="button">like</button> </a> -->
+                                <form action="/delete/<%= post._id %>" method="post">
+                                    <button type="submit">Delete</button>
+                                  </form>
+                                <form action="/like/<%= post._id %>" method="post">
+                                    <button type="submit">❤️</button>
+                                  </form>
+                            </ul>
+        
+                        </div>
+        
+                    </div>
+
+                <%
+                })
+                %>
+    
+              
+    
+            </div>
+            <!-- End of gallery -->
+    
+            <div class="footer">
+                <div class="footer-left">
+                  <img src="profile-picture.jpg" alt="Profile Picture">
+                  <p>YourUsername</p>
+                </div>
+                <div class="footer-right">
+                  <button>Follow</button>
+                </div>
+              </div>
+    
+        </div>
+        <!-- End of container -->
+        <script>
+            document.getElementById('expand-trigger').addEventListener('click', function() {
+              var expandableContent = document.getElementById('expandable-content');
+              if (expandableContent.style.display === 'none' || expandableContent.style.display === '') {
+                expandableContent.style.display = 'block';
+              } else {
+                expandableContent.style.display = 'none';
+              }
+            });
+          </script>
+    
+    </main>
+</body>
+</html>

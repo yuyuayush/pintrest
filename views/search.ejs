@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheets/index.css">
+</head>
+<body>
+    <body>
+      <html lang="en">
+
+      <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+        <title>Pinteresting | Gallery Layout</title>
+      </head>
+      <!-- A Simple non functional Pinterest inspired page layout created using only HTML and CSS.
+             Created by M. Hassler - Hassified -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+      
+      <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+      
+      <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+      
+      <body>
+      
+        <div class="header">
+          <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/pinterest-round-color-icon.png" class="icon pinterest-icon">
+          <ul class="navigation">
+            <li>Home</li>
+            <li>Explore</li>
+            <li>Create</li>
+          </ul>
+          <div class="search-bar">
+            <form action="/search" method="post">
+
+              <span>
+              <img src="https://www.brilliantlightingcenter.com/data/images/icons/search.svg" class="search-icon">
+              <input type="text" id="searchTerm" required name="input" value="" placeholder="Search">
+
+              <button type="submit">search</button>
+            </span>
+            </form>
+          </div>
+          <div class="nav-icons">
+            <img src="https://uxwing.com/wp-content/themes/uxwing/download/communication-chat-call/bell-icon.png" class="icon nav-icon">
+            <img src="https://uxwing.com/wp-content/themes/uxwing/download/communication-chat-call/speech-bubble-black-icon.png" class="icon nav-icon">
+           <a href="/profile"> <img src="https://uxwing.com/wp-content/themes/uxwing/download/arrow-direction/angle-bottom-icon.png" class="icon nav-icon arrow-icon">
+           </a>
+          </div>
+        </div>
+        <div class="grid">
+        <% post.map((p,index)=>{
+          %>
+
+          <div class="grid-item">
+            <div>
+              <img src="/images/uploads/<%=p.image %>" 
+              />
+              <span>
+                <%= p.like%> 
+                <% if(user?.id){%>
+                  <form action="/like/<%= p._id %>" method="post">
+                    <button id="btn" type="submit"  >click here to like ❤️❤️❤️  </button>
+                  </form>
+                  <% } %>
+                </span>
+            </div>
+          </div>
+          <%
+        })
+      %>
+        </div>
+      
+        <script>
+         
+          
+
+          $(".grid").imagesLoaded(function() {
+            $(".grid").masonry({
+              itemSelector: ".grid-item"
+            });
+          });
+        </script>
+      </body>
+      
+      </html>
+   </body>
+                     
+   
+</body>
+</html>
